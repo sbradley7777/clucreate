@@ -1,0 +1,22 @@
+192.168.200.18	orion.maiolino.org	orion	# Added by NetworkManager
+127.0.0.1	localhost.localdomain	localhost
+::1	orion.maiolino.org	orion	localhost6.localdomain6	localhost6
+
+#RHEL4 Cluster
+192.168.122.41 node1-r4.maiolino.org
+192.168.122.42 node2-r4.maiolino.org
+192.168.122.43 node3-r4.maiolino.org
+192.168.122.44 node4-r4.maiolino.org
+192.168.122.45 node5-r4.maiolino.org
+#RHEL5 Cluster
+192.168.122.51 node1-r5.maiolino.org
+192.168.122.52 node2-r5.maiolino.org
+192.168.122.53 node3-r5.maiolino.org
+192.168.122.54 node4-r5.maiolino.org
+192.168.122.55 node5-r5.maiolino.org
+#RHEL6 Cluster
+192.168.122.61 node1-r6.maiolino.org
+192.168.122.62 node2-r6.maiolino.org
+192.168.122.63 node3-r6.maiolino.org
+192.168.122.64 node4-r6.maiolino.org
+192.168.122.65 node5-r6.maiolino.org
