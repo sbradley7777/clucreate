@@ -1,0 +1,5 @@
+Requirements:
+
+	- Templates:
+		-the script uses e1000 network driver as default to create the cluster nodes, so, the templates should also have e1000 NIC to avoid hardware problems.
+

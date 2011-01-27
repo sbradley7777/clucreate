@@ -13,6 +13,7 @@ RHEL6_TEMPLATE="/var/lib/libvirt/images/RHEL6.img"
 
 TEMPLATE_DIR="/var/lib/libvirt/images"
 SNAPSHOTS_DIR="/var/lib/libvirt/snapshots"
+VM_CONFIG_DIR="/etc/libvirt/qemu"
 PLATAFORM=$1
 NODES=$2
 NODE_NUM=1
@@ -21,7 +22,9 @@ NODE_NUM=1
 
 QEMU_IMG=`which qemu-img`
 VIRT_INSTALL=`which virt-install`
-
+DNS_MASQ=`which dnsmasq`
+RM=`which rm`
+SERVICE=`which service`
 #Define MAC ADDRESSSES:
 
 MAC_RHEL4_DEF='52:54:00:aa:e4:0'
@@ -43,6 +46,8 @@ echo
 #DELETE SNAPSHOTS
 snap_delete()
 {
+CLUSTER=$1
+$RM $SNAPSHOTS_DIR/$CLUSTER*
 echo delete_vm
 }
 
@@ -57,7 +62,24 @@ $VIRT_INSTALL --name=$OS-node$NODE --ram=1024 --vcpus=2 --import --os-type=linux
 
 vm_delete()
 {
-echo vm_delete
+CLUSTER=$1
+
+if [ $CLUSTER == rhel4 ]; then
+	$RM $VM_CONFIG_DIR/rhel4-*
+	snap_delete $CLUSTER
+	$SERVICE libvirtd restart
+elif [ $CLUSTER == rhel5 ]; then
+	$RM $VM_CONFIG_DIR/rhel5-*
+	snap_delete $CLUSTER
+	$SERVICE libvirtd restart
+elif [ $CLUSTER == rhel6 ]; then
+	$RM $VM_CONFIG_DIR/rhel6-*
+	snap_delete $CLUSTER
+	$SERVICE libvirtd restart
+else
+	echo "WRONG PARAMETER"
+fi
+	
 }
 
 
@@ -106,12 +128,32 @@ echo		"<plataform> == rhel4|rhel5|rhel6"
 echo		"<nodes> number of cluster nodes (max nodes: 5)"
 }
 
-if [ $1 == rhel4 ] ; then
+dhcp_enable()
+{
+echo "Setting up dhcp server..."
+echo $DNS_MASQ
+killall -9 dnsmasq
+sleep 1
+$DNS_MASQ \
+--conf-file=./dnsmasq.conf
+echo "Done"
+echo
+echo "Setting up hostnames..."
+cp ./hosts /etc/hosts
+echo "Done"
+}
+
+if [ $1 == rhel4 ]; then
+dhcp_enable
 RHEL4
 elif [ $1 == rhel5 ]; then
+dhcp_enable
 RHEL5
 elif [ $1 == rhel6 ]; then
+dhcp_enable
 RHEL6
+elif [ $1 == delete ]; then
+vm_delete $2
 else
 usage
 fi
