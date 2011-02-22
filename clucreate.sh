@@ -158,6 +158,7 @@ dhcp_enable()
 echo "Setting up dhcp server..."
 echo $DNS_MASQ
 killall -9 dnsmasq
+cp ./cluster_hosts /etc/dnsmasq.d/cluster_hosts
 sleep 1
 $DNS_MASQ \
 --conf-file=./dnsmasq.conf

@@ -1,5 +1,14 @@
+Since this tool has being designed to be as much generic as possible (i.e. set up cluster using templates of any distro), there are some manual requirements that should be configured.
+
 Requirements:
+	
+	- each template should not have any network card added to the virtual machine, but should have the /etc/sysconfig/network-scripts/ifcfg-eth0 with the following configuration:
 
-	- Templates:
-		-the script uses e1000 network driver as default to create the cluster nodes, so, the templates should also have e1000 NIC to avoid hardware problems.
+	DEVICE=eth0
+	BOOTPROTO=dhcp
+	ONBOOT=yes 
 
+	- each template should have a file /etc/sysconfig/network with ONLY the following configuration:
+
+		NETWORKING=yes
+		IPv6=no
