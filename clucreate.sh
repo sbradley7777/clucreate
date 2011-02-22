@@ -132,7 +132,7 @@ echo
 
 while [ $NODE_NUM -le $NODES ]; do
 	snap_create $FEDORA_TEMPLATE fedora-node$NODE_NUM.img
-	vm_create fedora $NODE_NUM $MAC_FEDORA_DEF$NODE_NUM
+	vm_create fedora13 $NODE_NUM $MAC_FEDORA_DEF$NODE_NUM
 	NODE_NUM=$(($NODE_NUM+1))
 done
 }
@@ -165,6 +165,7 @@ echo "Done"
 echo
 }
 
+#main()
 if [ $1 == rhel4 ]; then
 dhcp_enable
 RHEL4
