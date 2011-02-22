@@ -12,3 +12,5 @@ Requirements:
 
 		NETWORKING=yes
 		IPv6=no
+
+	- each template should have NetworkManager and iptables disabled
