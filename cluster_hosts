@@ -16,3 +16,9 @@
 192.168.122.63 node3-r6.maiolino.org
 192.168.122.64 node4-r6.maiolino.org
 192.168.122.65 node5-r6.maiolino.org
+#FEDORA Cluster
+192.168.122.101 node1-fedora.maiolino.org
+192.168.122.102 node2-fedora.maiolino.org
+192.168.122.103 node3-fedora.maiolino.org
+192.168.122.104 node4-fedora.maiolino.org
+192.168.122.105 node5-fedora.maiolino.org

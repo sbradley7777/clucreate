@@ -147,6 +147,12 @@ echo    "clucreate <delete> <plataform>"
 echo
 }
 
+#dhcp_enable() starts the dnsmasq dhcp server and setup the hostnames 
+#to be assigned to each hosts using the cluster_hosts file.
+#It will not discard /etc/hosts to setup the hosts files,
+#but also read cluster_hosts, 
+#which will avoid to overwrite the system hosts file
+
 dhcp_enable()
 {
 echo "Setting up dhcp server..."
@@ -157,9 +163,6 @@ $DNS_MASQ \
 --conf-file=./dnsmasq.conf
 echo "Done"
 echo
-echo "Setting up hostnames..."
-cp ./hosts /etc/hosts
-echo "Done"
 }
 
 if [ $1 == rhel4 ]; then
