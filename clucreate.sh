@@ -10,7 +10,7 @@ MAX_NODES=5
 RHEL4_TEMPLATE="/var/lib/libvirt/images/RHEL4.img"
 RHEL5_TEMPLATE="/var/lib/libvirt/images/RHEL5.img"
 RHEL6_TEMPLATE="/var/lib/libvirt/images/RHEL6.img"
-FEDORA_TEMPLATE="/var/lib/libvirt/images/Fedora14.img"
+FEDORA_TEMPLATE="/var/lib/libvirt/images/fedora.img"
 
 TEMPLATE_DIR="/var/lib/libvirt/images"
 SNAPSHOTS_DIR="/var/lib/libvirt/snapshots"
@@ -41,6 +41,7 @@ NODE_NAME=$2
 
 echo Creating node $NODE_NAME...
 $QEMU_IMG create -f qcow2 -o backing_file=$TEMPLATE $SNAPSHOTS_DIR/$NODE_NAME
+echo $QEMU_IMG create -f qcow2 -o backing_file=$TEMPLATE $SNAPSHOTS_DIR/$NODE_NAME
 echo Node $NODE_NAME created...
 echo
 }
@@ -69,21 +70,20 @@ CLUSTER=$1
 if [ $CLUSTER == rhel4 ]; then
 	$RM $VM_CONFIG_DIR/rhel4-*
 	snap_delete $CLUSTER
-	$SERVICE libvirtd restart
 elif [ $CLUSTER == rhel5 ]; then
 	$RM $VM_CONFIG_DIR/rhel5-*
 	snap_delete $CLUSTER
-	$SERVICE libvirtd restart
 elif [ $CLUSTER == rhel6 ]; then
 	$RM $VM_CONFIG_DIR/rhel6-*
 	snap_delete $CLUSTER
-	$SERVICE libvirtd restart
 elif [ $CLUSTER == fedora ]; then
-	$RM $VM_CONFIG_DIR/fedora-*
+	$RM $VM_CONFIG_DIR/fedora13-*
 	snap_delete $CLUSTER
 else
 	echo "WRONG PARAMETER"
 fi
+
+$SERVICE libvirtd restart
 	
 }
 
@@ -131,7 +131,7 @@ echo Setting up a FEDORA cluster...
 echo
 
 while [ $NODE_NUM -le $NODES ]; do
-	snap_create $FEDORA_TEMPLATE fedora-node$NODE_NUM.img
+	snap_create $FEDORA_TEMPLATE fedora13-node$NODE_NUM.img
 	vm_create fedora13 $NODE_NUM $MAC_FEDORA_DEF$NODE_NUM
 	NODE_NUM=$(($NODE_NUM+1))
 done
