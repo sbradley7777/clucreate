@@ -10,6 +10,7 @@ MAX_NODES=5
 RHEL4_TEMPLATE="/var/lib/libvirt/images/RHEL4.img"
 RHEL5_TEMPLATE="/var/lib/libvirt/images/RHEL5.img"
 RHEL6_TEMPLATE="/var/lib/libvirt/images/RHEL6.img"
+FEDORA_TEMPLATE="/var/lib/libvirt/images/Fedora14.img"
 
 TEMPLATE_DIR="/var/lib/libvirt/images"
 SNAPSHOTS_DIR="/var/lib/libvirt/snapshots"
@@ -30,6 +31,7 @@ SERVICE=`which service`
 MAC_RHEL4_DEF='52:54:00:aa:e4:0'
 MAC_RHEL5_DEF='52:54:00:aa:e5:0'
 MAC_RHEL6_DEF='52:54:00:aa:e6:0'
+MAC_FEDORA_DEF='52:54:00:aa:fe:0'
 
 # CREATE SNAPSHOTS
 snap_create()
@@ -76,6 +78,9 @@ elif [ $CLUSTER == rhel6 ]; then
 	$RM $VM_CONFIG_DIR/rhel6-*
 	snap_delete $CLUSTER
 	$SERVICE libvirtd restart
+elif [ $CLUSTER == fedora ]; then
+	$RM $VM_CONFIG_DIR/fedora-*
+	snap_delete $CLUSTER
 else
 	echo "WRONG PARAMETER"
 fi
@@ -120,12 +125,26 @@ while [ $NODE_NUM -le $NODES ]; do
 done
 }
 
+FEDORA()
+{
+echo Setting up a FEDORA cluster...
+echo
+
+while [ $NODE_NUM -le $NODES ]; do
+	snap_create $FEDORA_TEMPLATE fedora-node$NODE_NUM.img
+	vm_create fedora $NODE_NUM $MAC_FEDORA_DEF$NODE_NUM
+	NODE_NUM=$(($NODE_NUM+1))
+done
+}
+
 usage()
 {
 echo "Usage:"
 echo 	"clucreate <plataform> <nodes>"
-echo		"<plataform> == rhel4|rhel5|rhel6"
+echo		"<plataform> == rhel4|rhel5|rhel6|fedora"
 echo		"<nodes> number of cluster nodes (max nodes: 5)"
+echo    "clucreate <delete> <plataform>"
+echo
 }
 
 dhcp_enable()
@@ -152,6 +171,9 @@ RHEL5
 elif [ $1 == rhel6 ]; then
 dhcp_enable
 RHEL6
+elif [ $1 == fedora ]; then
+dhcp_enable
+FEDORA
 elif [ $1 == delete ]; then
 vm_delete $2
 else
