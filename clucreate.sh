@@ -139,11 +139,17 @@ done
 
 usage()
 {
+echo
 echo "Usage:"
-echo 	"clucreate <plataform> <nodes>"
+echo 	"clucreate <action> <plataform> <nodes>"
+echo		"<action> == create|delete|dnsrestart"
 echo		"<plataform> == rhel4|rhel5|rhel6|fedora"
 echo		"<nodes> number of cluster nodes (max nodes: 5)"
-echo    "clucreate <delete> <plataform>"
+echo
+echo		"<action>"
+echo		"	create: create a new cluster set"
+echo		"	delete: delete a already created cluster"
+echo		"	dnsrestart: restart cluster dns and dhcp settings"
 echo
 }
 
@@ -181,6 +187,8 @@ dhcp_enable
 FEDORA
 elif [ $1 == delete ]; then
 vm_delete $2
+elif [ $1 == dnsrestart ]; then
+dhcp_enable
 else
 usage
 fi

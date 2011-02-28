@@ -14,3 +14,5 @@ Requirements:
 		IPv6=no
 
 	- each template should have NetworkManager and iptables disabled
+
+	- a hack to the cman init script should be done to bypass the NetworkManager check
