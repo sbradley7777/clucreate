@@ -142,7 +142,7 @@ usage()
 echo
 echo "Usage:"
 echo 	"clucreate <action> <plataform> <nodes>"
-echo		"<action> == create|delete|dnsrestart"
+echo		"<action> == Action to be performed by the script"
 echo		"<plataform> == rhel4|rhel5|rhel6|fedora"
 echo		"<nodes> number of cluster nodes (max nodes: 5)"
 echo
@@ -151,6 +151,14 @@ echo		"	create: create a new cluster set"
 echo		"	delete: delete a already created cluster"
 echo		"	dnsrestart: restart cluster dns and dhcp settings"
 echo
+echo		"<plataform>"
+echo		"	rhel4: Action performed on a RHEL4 cluster"
+echo		"	rhel5: Action performed on a RHEL5 cluster"
+echo		"	rhel6: Action performed on a RHEL6 cluster"
+echo		"	fedora: Action performed on a FEDORA cluster"
+echo
+echo		"<nodes>"
+echo		"	The clucreate currently supports only a max of 5 nodes on a cluster"
 }
 
 #dhcp_enable() starts the dnsmasq dhcp server and setup the hostnames 
