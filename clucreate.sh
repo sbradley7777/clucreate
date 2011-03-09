@@ -15,8 +15,7 @@ FEDORA_TEMPLATE="/var/lib/libvirt/images/fedora.img"
 TEMPLATE_DIR="/var/lib/libvirt/images"
 SNAPSHOTS_DIR="/var/lib/libvirt/snapshots"
 VM_CONFIG_DIR="/etc/libvirt/qemu"
-PLATAFORM=$1
-NODES=$2
+NODES=$3
 NODE_NUM=1
 
 #Find executables
@@ -180,7 +179,9 @@ echo "Done"
 echo
 }
 
-#main()
+create()
+{
+
 if [ $1 == rhel4 ]; then
 dhcp_enable
 RHEL4
@@ -193,6 +194,15 @@ RHEL6
 elif [ $1 == fedora ]; then
 dhcp_enable
 FEDORA
+else
+	echo "Plataform not found"
+	usage
+fi
+}
+
+#main()
+if [ $1 == create ]; then
+create $2
 elif [ $1 == delete ]; then
 vm_delete $2
 elif [ $1 == dnsrestart ]; then
