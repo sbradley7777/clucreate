@@ -80,6 +80,7 @@ elif [ $CLUSTER == fedora ]; then
 	snap_delete $CLUSTER
 else
 	echo "WRONG PARAMETER"
+	exit
 fi
 
 $SERVICE libvirtd restart
@@ -201,12 +202,37 @@ fi
 }
 
 #main()
-if [ $1 == create ]; then
-create $2
-elif [ $1 == delete ]; then
-vm_delete $2
-elif [ $1 == dnsrestart ]; then
-dhcp_enable
-else
-usage
-fi
+
+case "$1" in
+
+"create" )
+
+	if [ $# != 3 ]; then
+		usage
+		exit
+	fi
+ 
+	create $2
+;;
+
+"delete")
+	
+	if [ $# != 2 ]; then
+		usage
+		exit
+	fi
+	vm_delete $2
+;;
+
+"dnsrestart")
+	
+	if [ $# != 1 ]; then
+		usage
+		exit
+	fi
+	dhcp_enable
+;;
+
+* )
+	usage
+esac
