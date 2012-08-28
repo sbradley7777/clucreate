@@ -1,24 +1,21 @@
-#RHEL4 Cluster
-192.168.122.41 node1-r4.maiolino.org
-192.168.122.42 node2-r4.maiolino.org
-192.168.122.43 node3-r4.maiolino.org
-192.168.122.44 node4-r4.maiolino.org
-192.168.122.45 node5-r4.maiolino.org
-#RHEL5 Cluster
-192.168.122.51 node1-r5.maiolino.org
-192.168.122.52 node2-r5.maiolino.org
-192.168.122.53 node3-r5.maiolino.org
-192.168.122.54 node4-r5.maiolino.org
-192.168.122.55 node5-r5.maiolino.org
-#RHEL6 Cluster
-192.168.122.61 node1-r6.maiolino.org
-192.168.122.62 node2-r6.maiolino.org
-192.168.122.63 node3-r6.maiolino.org
-192.168.122.64 node4-r6.maiolino.org
-192.168.122.65 node5-r6.maiolino.org
-#FEDORA Cluster
-192.168.122.101 node1-fedora.maiolino.org
-192.168.122.102 node2-fedora.maiolino.org
-192.168.122.103 node3-fedora.maiolino.org
-192.168.122.104 node4-fedora.maiolino.org
-192.168.122.105 node5-fedora.maiolino.org
+192.168.1.140 rh4node0.examplerh.com rh4node0 rh40
+192.168.1.141 rh4node1.examplerh.com rh4node1 rh41
+192.168.1.142 rh4node2.examplerh.com rh4node2 rh42
+192.168.1.143 rh4node3.examplerh.com rh4node3 rh43
+
+192.168.1.150 rh5node0.examplerh.com rh5node0 rh50
+192.168.1.151 rh5node1.examplerh.com rh5node1 rh51
+192.168.1.152 rh5node2.examplerh.com rh5node2 rh52
+192.168.1.153 rh5node3.examplerh.com rh5node3 rh53
+192.168.1.154 rh5node4.examplerh.com rh5node4 rh54
+192.168.1.155 rh5node5.examplerh.com rh5node5 rh55
+192.168.1.156 rh5node6.examplerh.com rh5node6 rh56
+
+192.168.1.160 rh6node0.examplerh.com rh6node0 rh60 snmptrapserver.examplerh.com
+192.168.1.161 rh6node1.examplerh.com rh6node1 rh61
+192.168.1.162 rh6node2.examplerh.com rh6node2 rh62
+192.168.1.163 rh6node3.examplerh.com rh6node3 rh63
+192.168.1.164 rh6node4.examplerh.com rh6node4 rh64
+192.168.1.165 rh6node5.examplerh.com rh6node5 rh65
+192.168.1.166 rh6node6.examplerh.com rh6node6 rh66
+
